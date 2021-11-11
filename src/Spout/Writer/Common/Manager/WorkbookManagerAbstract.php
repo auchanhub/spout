@@ -277,6 +277,41 @@ abstract class WorkbookManagerAbstract implements WorkbookManagerInterface
     }
 
     /**
+     * @param float|null $width
+     */
+    public function setDefaultColumnWidth(float $width)
+    {
+        $this->worksheetManager->setDefaultColumnWidth($width);
+    }
+
+    /**
+     * @param float|null $height
+     */
+    public function setDefaultRowHeight(float $height)
+    {
+        $this->worksheetManager->setDefaultRowHeight($height);
+    }
+
+    /**
+     * @param float $width
+     * @param array $columns One or more columns with this width
+     */
+    public function setColumnWidth(float $width, array $columns)
+    {
+        $this->worksheetManager->setColumnWidth($width, $columns);
+    }
+
+    /**
+     * @param float $width The width to set
+     * @param int $start First column index of the range
+     * @param int $end Last column index of the range
+     */
+    public function setColumnWidthForRange(float $width, int $start, int $end)
+    {
+        $this->worksheetManager->setColumnWidthForRange($width, $start, $end);
+    }
+
+    /**
      * Closes the workbook and all its associated sheets.
      * All the necessary files are written to disk and zipped together to create the final file.
      * All the temporary files are then deleted.

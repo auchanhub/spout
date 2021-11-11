@@ -43,6 +43,16 @@ interface WorkbookManagerInterface
     public function getCurrentWorksheet();
 
     /**
+     * @param float $width
+     */
+    public function setDefaultColumnWidth(float $width);
+
+    /**
+     * @param float $height
+     */
+    public function setDefaultRowHeight(float $height);
+
+    /**
      * Sets the given sheet as the current one. New data will be written to this sheet.
      * The writing will resume where it stopped (i.e. data won't be truncated).
      *

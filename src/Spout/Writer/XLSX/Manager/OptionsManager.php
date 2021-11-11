@@ -39,6 +39,9 @@ class OptionsManager extends OptionsManagerAbstract
             Options::DEFAULT_ROW_STYLE,
             Options::SHOULD_CREATE_NEW_SHEETS_AUTOMATICALLY,
             Options::SHOULD_USE_INLINE_STRINGS,
+            Options::DEFAULT_COLUMN_WIDTH,
+            Options::DEFAULT_ROW_HEIGHT,
+            Options::COLUMN_WIDTHS,
         ];
     }
 
@@ -52,7 +55,7 @@ class OptionsManager extends OptionsManagerAbstract
             ->setFontName(self::DEFAULT_FONT_NAME)
             ->build();
 
-        $this->setOption(Options::TEMP_FOLDER, \sys_get_temp_dir());
+        $this->setOption(Options::TEMP_FOLDER, sys_get_temp_dir());
         $this->setOption(Options::DEFAULT_ROW_STYLE, $defaultRowStyle);
         $this->setOption(Options::SHOULD_CREATE_NEW_SHEETS_AUTOMATICALLY, true);
         $this->setOption(Options::SHOULD_USE_INLINE_STRINGS, true);

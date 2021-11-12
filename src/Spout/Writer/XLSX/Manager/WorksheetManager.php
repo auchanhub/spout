@@ -123,6 +123,7 @@ EOD;
         $worksheet->setFilePointer($sheetFilePointer);
 
         fwrite($sheetFilePointer, self::SHEET_XML_FILE_HEADER);
+        fwrite($sheetFilePointer, '<sheetData>');
     }
 
     /**
@@ -162,13 +163,6 @@ EOD;
      */
     private function addNonEmptyRow(Worksheet $worksheet, Row $row)
     {
-        $sheetFilePointer = $worksheet->getFilePointer();
-        if (!$this->hasWrittenRows) {
-            fwrite($sheetFilePointer, $this->getXMLFragmentForDefaultCellSizing());
-            fwrite($sheetFilePointer, $this->getXMLFragmentForColumnWidths());
-            fwrite($sheetFilePointer, '<sheetData>');
-        }
-        $cellIndex = 0;
         $rowStyle = $row->getStyle();
         $rowIndexOneBased = $worksheet->getLastWrittenRowIndex() + 1;
         $numCells = $row->getNumCells();
@@ -348,9 +342,13 @@ EOD;
             return;
         }
 
+        fwrite($worksheetFilePointer, '</sheetData>');
+
         if ($this->hasWrittenRows) {
-            fwrite($worksheetFilePointer, '</sheetData>');
+            fwrite($worksheetFilePointer, $this->getXMLFragmentForDefaultCellSizing());
+            fwrite($worksheetFilePointer, $this->getXMLFragmentForColumnWidths());
         }
+
         fwrite($worksheetFilePointer, '</worksheet>');
         fclose($worksheetFilePointer);
     }
